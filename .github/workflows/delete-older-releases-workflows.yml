@@ -20,7 +20,7 @@ on:
         default: true
         type: boolean
       prerelease_option:
-        description: "Whether to differentiate pre-release."
+        description: "Filter by pre-release status."
         required: false
         default: "all"
         type: choice
@@ -90,14 +90,14 @@ env:
 
 jobs:
   build:
-    runs-on: ubuntu-22.04
-    if: ${{ github.event.repository.owner.id }} == ${{ github.event.sender.id }}
+    runs-on: ubuntu-24.04-arm
+    if: ${{ github.event.repository.owner.id == github.event.sender.id }}
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
-      - name: Initialization environment
+      - name: Initialize the environment
         id: init
         env:
           DEBIAN_FRONTEND: noninteractive
